@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton } from './Skeleton';
 import { User } from './User';
 
-export const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) => {
+export const Users = ({ items, isLoading, searchValue, onChangeSearchValue, invites, onClickInvite }) => {
   console.log(searchValue);
   return (
     <>
@@ -30,7 +30,7 @@ export const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) =>
           );  
           })
           .map((obj) => (
-            <User key={obj.id} {...obj} />
+            <User isInvited={invites.includes(obj.id)} key={obj.id} {...obj} />
           ))}
         </ul>
       )}
