@@ -10,6 +10,7 @@ function App() {
     const [invites, setInvites] = useState([1, 3]);
     const [isLoading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState("");
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         fetch("https://reqres.in/api/users")
@@ -36,17 +37,26 @@ function App() {
         }
     };
 
+    const onClickSendInvites = () => {
+        setSuccess(true);
+
+    };
+
     return (
         <div className="App">
-            <Users
-                onChangeSearchValue={onChangeSearchValue}
-                searchValue={searchValue}
-                items={users}
-                isLoading={isLoading}
-                invites={invites}
-                onClickInvite={onClickInvite}
-            />
-            {/* <Success /> */}
+            {success ? (
+                <Success count={invites.length}/>
+            ) : (
+                <Users
+                    onChangeSearchValue={onChangeSearchValue}
+                    searchValue={searchValue}
+                    items={users}
+                    isLoading={isLoading}
+                    invites={invites}
+                    onClickInvite={onClickInvite}
+                    onClickSendInvites={onClickSendInvites}
+                />
+            )}
         </div>
     );
 }
